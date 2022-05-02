@@ -5,7 +5,7 @@
 
 
 <br>
-unity 虽然也支持了 .astc， 但其引擎实现和 [astcenc][i1] 转换出来的文件还是有一些差异的， 需要转一定的转换。 最近在服务器集群docker环境里批量生成用户上传的图片转为原生astc， 此工程就是测试unity和astcenc二者之间的兼容性和性能优化。
+unity 虽然也支持了 .astc， 但其引擎实现和 [astcenc][i1] 转换出来的文件还是有一些差异的， 因此需要一定的转换。 最近在服务器集群docker环境里批量处理用户上传的图片转为原生astc， 此工程就是测试unity和astcenc二者之间的兼容性和性能优化。 更多详细的介绍参考 [我的博客][i3] 。
 
 <br>
 
@@ -102,3 +102,4 @@ void Dispose(Astc *astc) {
 
 [i1]: https://github.com/ARM-software/astc-encoder/
 [i2]: https://github.com/ARM-software/astc-encoder/blob/main/Docs/FormatOverview.md
+[i3]: https://huailiang.github.io/blog/2022/astc
