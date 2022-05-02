@@ -1,0 +1,7 @@
+/build_ios/
+/build_osx/
+/build.Android.arm64-v8a/
+/build.Android.armeabi-v7a/
+/build.Android.x86/
+/cmake-build-debug/
+/Plugins/
