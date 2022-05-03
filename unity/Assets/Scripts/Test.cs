@@ -22,35 +22,35 @@ public class Test : MonoBehaviour
 
     void OnGUI()
     {
+#if UNITY_EDITOR
         if (GUILayout.Button("ldr", _options))
         {
             var tex = new Texture2D(479, 320, TextureFormat.ASTC_8x8, false);
-            tex.LoadRawTextureData(ReadBuf("Assets/Res/ldr.astc"));
+            tex.LoadRawTextureData(ReadBuf("Assets/Resources/ldr.astc"));
             tex.Apply();
             raw.texture = tex;
         }
         if (GUILayout.Button("hdr", _options))
         {
             var tex = new Texture2D(479, 320, TextureFormat.ASTC_HDR_8x8, false);
-            tex.LoadRawTextureData(ReadBuf("Assets/Res/hdr.astc"));
+            tex.LoadRawTextureData(ReadBuf("Assets/Resources/hdr.astc"));
             tex.Apply();
             raw.texture = tex;
         }
-#if UNITY_EDITOR
+#endif
         GUILayout.Space(8);
         if (GUILayout.Button("ldr-2", _options))
         {
-            raw.texture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Res/ldr.astc");
+            raw.texture = Resources.Load<Texture2D>("ldr");
         }
         if (GUILayout.Button("hdr-2", _options))
         {
-            raw.texture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Res/hdr.astc");
+            raw.texture = Resources.Load<Texture2D>("hdr");
         }
-#endif
         GUILayout.Space(8);
         if (GUILayout.Button("native load", _options))
         {
-            var p = Path.Combine(Application.dataPath, "Res/ldr.astc");
+            var p = Path.Combine(Application.dataPath, "Resources/ldr.astc");
             LoadNative(p);
         }
         if (GUILayout.Button("native destroy", _options))
@@ -62,6 +62,15 @@ public class Test : MonoBehaviour
                 Destroy(raw.texture);
                 raw.texture = null;
             }
+        }
+        GUILayout.Space(8);
+        if (GUILayout.Button("copy2persist", _options))
+        {
+            var buf = Resources.Load<TextAsset>("ldr").bytes;
+            var t = Path.Combine(Application.persistentDataPath, "ldr.astc");
+            File.WriteAllBytes(t, buf);
+            var p = Path.Combine(Application.persistentDataPath, "ldr.astc");
+            LoadNative(p);
         }
     }
 
